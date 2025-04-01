@@ -1,12 +1,17 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  margin-right: 16px;
   width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 button {
-  background-color: #dc3545;
+  font-size: 16px;
+  background-color: #ffa500;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -21,4 +26,7 @@ button:hover {
 .text {
   display: flex;
   flex-direction: column;
+}
+.icon {
+  margin-right: 10px;
 }

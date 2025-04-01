@@ -1,11 +1,11 @@
 import styles from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contactsOps";
 import { toast } from "react-toastify";
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
 
@@ -21,17 +21,22 @@ export const ContactForm = () => {
     }
 
     const newContact = {
-      id: crypto.randomUUID(),
       name: name,
       number: phone,
     };
-    dispatch(addContact(newContact));
-
-    form.reset();
-    toast.success(`${newContact.name} has been added!`, {
-      position: "top-right",
-      autoClose: 3000,
-    });
+    try {
+      await dispatch(addContact(newContact));
+      form.reset();
+      toast.success(`${newContact.name} has been added!`, {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error(`Error: ${error.message}`, {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   };
   return (
     <div>
